@@ -34,7 +34,7 @@ class PropertyEditor:
                     if props[0] == GuiType.SLIDER:
                         action.properties[keys[n]] = (GuiType.SLIDER, self.components[n].get(), props[1], props[2])
                     elif props[0] == GuiType.DROPDOWN:
-                        action.properties[keys[n]] = (GuiType.DROPDOWN, val, props[1])
+                        action.properties[keys[n]] = (GuiType.DROPDOWN, val, props[2])
                     elif props[0] == GuiType.TEXTBOX:
                         action.properties[keys[n]] = (GuiType.TEXTBOX, self.components[n].get())
 
