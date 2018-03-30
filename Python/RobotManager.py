@@ -12,16 +12,6 @@ from _thread import start_new_thread
 import time
 
 
-def center(toplevel):
-    toplevel.update_idletasks()
-    w = toplevel.winfo_screenwidth()
-    h = toplevel.winfo_screenheight()
-    size = tuple(int(_) for _ in toplevel.geometry().split('+')[0].split('x'))
-    x = w/2 - size[0]/2
-    y = h/2 - size[1]/2
-    toplevel.geometry("%dx%d+%d+%d" % (size + (x, y)))
-
-
 class GifFrame(object):
     def __init__(self):
         self.frameCount = 0
@@ -48,6 +38,16 @@ class GifFrame(object):
 
     def destroy(self):
         self._window.destroy()
+
+
+def center(toplevel):
+    toplevel.update_idletasks()
+    w = toplevel.winfo_screenwidth()
+    h = toplevel.winfo_screenheight()
+    size = tuple(int(_) for _ in toplevel.geometry().split('+')[0].split('x'))
+    x = w/2 - size[0]/2
+    y = h/2 - size[1]/2
+    toplevel.geometry("%dx%d+%d+%d" % (size + (x, y)))
 
 
 actions = [None] * 8
@@ -105,23 +105,33 @@ def onActionClicked(event):
 
 
 for i in range(len(actionOptions)):
-    label = Label(frame, text=str(i + 1), image=actionOptions[i].image(), borderwidth=2, relief="groove", width=128, height=128)
-    label.place(x=0, y=20 + i * 135, anchor=NW)
+    label = Label(frame, text=str(i + 1), image=actionOptions[i].image(), borderwidth=2, relief="groove", width=64, height=64)
+    label.place(x=0, y=20 + i * 67, anchor=NW)
     dnd.add_dragable(label)
 
+labels = []
 for i in range(8):
-    labelFrame = Frame(frame, width=130, height=130)
+    labelFrame = Frame(frame, width=65, height=65)
     labelFrame.pack_propagate(0)
-    label = Label(labelFrame, text='Action ' + str(i + 1) + '\nDrag here!', borderwidth=2, relief="groove", width=128, height=128)
+    label = Label(labelFrame, text='Action ' + str(i + 1) + '\nDrag here!', borderwidth=2, relief="groove", width=64, height=64)
     label.pack()
     label.bind("<ButtonPress-1>", onActionClicked)
-    labelFrame.place(x=170 + 130 * i, y=(windowHeight - 128) / 2, anchor=NW)
+    labels.append(label)
+    labelFrame.place(x=170 + 65 * i, y=(windowHeight - 64) / 2, anchor=NW)
 
 
 def run_threaded():
+    controller = Controller()
+
     for action in actions:
         if action is not None:
-            action.run()
+            action.run(controller)
+        else:
+            controller.setTarget(0, 6000)
+            controller.setTarget(1, 6000)
+            controller.setTarget(2, 6000)
+            controller.setTarget(3, 6000)
+            controller.setTarget(4, 6000)
 
 
 def draw_animation(sm, delay):
@@ -146,8 +156,18 @@ def run():
     start_new_thread(run_animation, ())
 
 
+def reset():
+    global labels
+    global actions
+    actions = [None] * 8
+    for label in labels:
+        label.configure(image='')
+
+
 button = Button(master, text="Run", command=run)
-button.place(x=windowWidth / 2, y=windowHeight - 50, anchor=NW)
+button.place(x=400, y=100, anchor=NW)
+button = Button(master, text="Reset", command =reset)
+button.place(x=500, y=100, anchor=NW)
 
 center(master)
 mainloop()

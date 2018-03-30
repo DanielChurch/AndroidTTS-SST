@@ -7,10 +7,14 @@ class HeadTiltAction(Action):
         self.img = 'head_tilt.gif'
 
         # Properties in format (initialValue, min, max)
-        self.properties['a'] = (GuiType.SLIDER, 0, 0, 0)
+        self.properties['Tilt'] = (GuiType.SLIDER, 0, -5, 5)
 
     # Override run function
-    def run(self):
+    def run(self, controller):
+        head_tilt_step = int(self.getPropertyValue('Tilt') * 500 + 6000)
+        controller.setTarget(4, head_tilt_step)
+        time.sleep(1)
+        print(head_tilt_step)
         pass
 
     def copy(self):

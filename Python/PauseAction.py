@@ -8,13 +8,19 @@ class PauseAction(Action):
         self.img = 'timer.gif'
 
         # Properties in format (initialValue, min, max)
-        self.properties['Duration'] = (GuiType.SLIDER, 5, 0, 10)
+        self.properties['Duration'] = (GuiType.SLIDER, 0, 0, 10)
 
     # Override run function
-    def run(self):
-        print('timer start - running for', Action.getPropertyValue(self, 'Duration'), 'seconds')
-        time.sleep(Action.getPropertyValue(self, 'Duration'))
+    def run(self, controller):
+        print('timer start - running for', float(self.properties['Duration'][0]), 'seconds')
+        controller.setTarget(0, 6000)
+        controller.setTarget(1, 6000)
+        controller.setTarget(2, 6000)
+        controller.setTarget(3, 6000)
+        controller.setTarget(4, 6000)
+        time.sleep(self.getPropertyValue('Duration'))
         print('timer end')
+        pass
 
     def copy(self):
         return PauseAction()

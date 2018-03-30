@@ -7,7 +7,6 @@ class WaitForSpeechAction(Action):
         self.img = 'turn_body.gif'
 
         # Properties in format (GuiType, initialValue, min, max)
-        self.properties[''] = (GuiType.SLIDER, 0, 0, 0)
 
     # Override run function
     def run(self):

@@ -1,6 +1,8 @@
 from tkinter import *
 from enum import Enum, auto
+import time
 
+# from Maestro import Controller
 
 class GuiType(Enum):
     # (SLIDER, init val, min, max)
@@ -10,21 +12,21 @@ class GuiType(Enum):
     # (DROPDOWN, init index, [options])
     DROPDOWN = auto()
 
-
 class Action:
     def __init__(self):
         self.img = ""
-        # Unique map of properties in format (GuiType, initialValue, min, max)
+        # Unique map of properties in format (initialValue, min, max)
         self.properties = {}
+        self.propertyList = {}
 
-    def run(self):
+    def getPropertyValue(self, property):
+        return self.properties[property][0]
+
+    def run(self, controller):
         pass
 
     def copy(self):
         pass
-
-    def getPropertyValue(self, property):
-        return float(self.properties[property][0])
 
     # Lets us draw the image, we can't load in the image until tkinter is init
     def image(self):

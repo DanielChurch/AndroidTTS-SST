@@ -19,6 +19,7 @@ class PropertyEditor:
     def __init__(self, action):
         master = Toplevel()
 
+        self.extra = 0
         self.components = []
         for i in range(len(action.properties.keys())):
             key = list(action.properties.keys())[i]
@@ -41,22 +42,26 @@ class PropertyEditor:
             def addScale():
                 _, value, start, end = action.properties[key]
                 self.components.append(Scale(master, label=str(key), from_=start, to=end, resolution=0.1, orient=HORIZONTAL, command=onCommit))
-                self.components[-1].grid(row=i, column=0, sticky='ew', columnspan=2)
+                self.components[-1].grid(row=i + self.extra, column=0, sticky='ew', columnspan=2)
                 self.components[-1].set(value)
 
             def addDropDown():
                 _, value, options = action.properties[key]
                 tkvar = StringVar(master)
                 tkvar.set(value)
+                Label(master, text=str(key)).grid(row=i + self.extra, column=0, sticky='ew', columnspan=2)
+                self.extra = self.extra + 1
                 self.components.append(OptionMenu(master, tkvar, *options, command=onCommit))
-                self.components[-1].grid(row=i, column=0, sticky='ew', columnspan=2)
+                self.components[-1].grid(row=i + self.extra, column=0, sticky='ew', columnspan=2)
 
             def addTextBox():
                 _, value = action.properties[key]
                 sv = StringVar()
                 sv.trace("w", lambda name, index, mode, sv=sv: onCommit(sv))
+                Label(master, text=str(key)).grid(row=i + self.extra, column=0, sticky='ew', columnspan=2)
+                self.extra = self.extra + 1
                 self.components.append(Entry(master, textvariable=sv))
-                self.components[-1].grid(row=i, column=0, sticky='ew', columnspan=2)
+                self.components[-1].grid(row=i + self.extra, column=0, sticky='ew', columnspan=2)
                 self.components[-1].insert(END, value)
 
             {
