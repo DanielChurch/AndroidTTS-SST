@@ -25,6 +25,10 @@ def turn_robot(args):
     print("Turing Robot", direction, amount)
 
 
+def on_sst(args):
+    text = args[0]
+
+
 while True:
     connection, address = ss.accept()
 
@@ -33,6 +37,7 @@ while True:
     {
         'move': move_robot,  # eg. move 5
         'turn': turn_robot,  # eg. turn left 5
+        'sttResult': on_sst,
         'exit': lambda: exit(),
     }.get(command, lambda: print('Invalid command'))(args)
 
