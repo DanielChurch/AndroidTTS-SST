@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        findViewById<View>(R.id.connect_button).setOnClickListener {
+        findViewById<Button>(R.id.connect_button).setOnClickListener {
             startActivity(
                     Intent(this, TalkActivity::class.java).apply {
                         putExtra("ip", findViewById<EditText>(R.id.ip_text).text.toString())

@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.speech.RecognizerIntent
 import android.content.Intent
+import android.util.Log
 import android.widget.TextView
 
 class TalkActivity: AppCompatActivity() {
@@ -34,6 +35,7 @@ class TalkActivity: AppCompatActivity() {
 
         findViewById<Button>(R.id.stt_button).run {
             setOnClickListener {
+                Log.v("Android", "You clicked the button")
                 listenForSpeech()
             }
         }
@@ -66,12 +68,12 @@ class TalkActivity: AppCompatActivity() {
                     sendMessage(
                             obtainMessage().apply {
                                 this.data = Bundle().apply {
-                                    putString("TT", it.joinToString(" "))
+                                    putString("TT", it[0])
                                 }
                             }
                     )
                 }
-                findViewById<TextView>(R.id.status).text = it.joinToString(" ")
+                findViewById<TextView>(R.id.status).text = it[0]
             }
         }
         super.onActivityResult(requestCode, resultCode, data)

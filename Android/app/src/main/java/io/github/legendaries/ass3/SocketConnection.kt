@@ -33,6 +33,8 @@ class SocketConnection(val parent: TalkActivity, val ip: String, val port: Int):
             override fun handleMessage(msg: Message?) {
                 super.handleMessage(msg)
 
+                Log.v("Android", "We made it boiiis")
+
                 msg?.data?.getString("TT")?.let {
                     writeMessage(it)
                 }
@@ -40,7 +42,7 @@ class SocketConnection(val parent: TalkActivity, val ip: String, val port: Int):
         }
 
         // Handle reading from the server
-        readMessage()
+        // readMessage()
 
         Looper.loop()
     }
@@ -69,7 +71,7 @@ class SocketConnection(val parent: TalkActivity, val ip: String, val port: Int):
                 PrintWriter(it.getOutputStream(), true).use {
                     it.run {
                         Log.v("Android", message)
-                        println(message.toByteArray())
+                        print(message)
                         flush()
                     }
                 }

@@ -5,7 +5,7 @@ ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 host = socket.gethostname()
 port = 6969
 
-ss.bind(('127.0.0.1', port))
+ss.bind(('25.14.181.224', port))
 ss.listen(5)
 
 
@@ -22,7 +22,7 @@ def turn_robot(args):
     print("Turning Robot", args[0], args[1])
     # or
     (direction, amount) = args
-    print("Turing Robot", direction, amount)
+    print("Turning Robot", direction, amount)
 
 
 def on_sst(args):
@@ -32,13 +32,17 @@ def on_sst(args):
 while True:
     connection, address = ss.accept()
 
+    print('yo dawg someone connected')
+
     command, *args = connection.recv(1024).decode('ascii').split(' ')
+
+    print(command, args)
 
     {
         'move': move_robot,  # eg. move 5
         'turn': turn_robot,  # eg. turn left 5
         'sttResult': on_sst,
-        'exit': lambda: exit(),
-    }.get(command, lambda: print('Invalid command'))(args)
+        'exit': lambda e: exit(),
+    }.get(command, lambda e: print('Invalid command'))(args)
 
     connection.close()
