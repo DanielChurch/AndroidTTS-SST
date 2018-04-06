@@ -42,20 +42,21 @@ class TalkActivity: AppCompatActivity() {
     }
 
     fun listenForSpeech() {
-        connection.handler.run {
-            sendMessage(
-                    obtainMessage().apply {
-                        this.data = Bundle().apply {
-                            putString("TT", "turn left 5")
-                        }
-                    }
-            )
-        }
-//        startActivityForResult(
-//                Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
-//                    putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-//                }, REQUEST_CODE
-//        )
+        // Testing Code
+//        connection.handler.run {
+//            sendMessage(
+//                    obtainMessage().apply {
+//                        this.data = Bundle().apply {
+//                            putString("TT", "turn left 5")
+//                        }
+//                    }
+//            )
+//        }
+        startActivityForResult(
+                Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                    putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+                }, REQUEST_CODE
+        )
     }
 
     fun speakText(text: String) {
