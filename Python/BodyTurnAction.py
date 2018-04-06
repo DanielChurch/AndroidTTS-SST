@@ -11,7 +11,7 @@ class BodyTurnAction(Action):
         self.properties['Duration'] = (GuiType.SLIDER, 1000, 0, 10000)
 
     # Override run function
-    def run(self, controller):
+    def run(self, controller, server):
         duration = self.getPropertyValue('Duration')/1000
         if self.getPropertyValue('Rotation Direction') == 'right':
             controller.setAccel(2, 6)

@@ -10,7 +10,7 @@ class HeadTurnAction(Action):
         self.properties['Duration'] = (GuiType.SLIDER, 0, -5, 5)
 
     # Override run function
-    def run(self, controller):
+    def run(self, controller, server):
         head_step = int(self.getPropertyValue('Rotation in Degrees') * 500+6000)
         controller.setTarget(0,head_step)
         time.sleep(1)

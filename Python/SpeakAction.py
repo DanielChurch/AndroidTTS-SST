@@ -1,5 +1,5 @@
 from Action import *
-
+import time
 
 class SpeakAction(Action):
     def __init__(self):
@@ -17,13 +17,23 @@ class SpeakAction(Action):
         self.properties['Custom Quote'] = (GuiType.TEXTBOX, '')
 
     # Override run function
-    def run(self, controller):
-        if len(self.getPropertyValue('Custom Quote')) == 0:
-            # Use custom
+    def run(self, controller, server):
+        server.clients[0].text = "tts " + self.properties['Presets'][1]
+        print('tts ' + self.properties['Presets'][1])
+
+        while server.clients[0].command != 'done':
             pass
-        else:
-            # Use Preset
-            pass
+
+        server.clients[0].reset()
+
+        time.sleep(1)
+
+        # if len(self.getPropertyValue('Custom Quote')) == 0:
+        #     # Use custom
+        #     pass
+        # else:
+        #     # Use Preset
+        #     pass
 
     def copy(self):
         return SpeakAction()

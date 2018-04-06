@@ -8,8 +8,11 @@ from PropertyEditor import *
 from SpeakAction import *
 from WaitForSpeechAction import *
 from _thread import start_new_thread
+from Server import *
 
 import time
+
+server = Server()
 
 
 class GifFrame(object):
@@ -23,15 +26,16 @@ class GifFrame(object):
         self.imageLabel2.place(x=master.winfo_screenwidth() / 2, y=master.winfo_screenheight() / 2, anchor=CENTER)
 
     def update(self):
-        try:
-            self.imageGIF2 = PhotoImage(file="gif.gif", format="gif -index " + str(self.frameCount))
-            self.imageLabel2.configure(image=self.imageGIF2)
-        except:
-            print('test')
-            self.frameCount = 0
-            self.imageGIF2 = PhotoImage(file="gif.gif", format="gif -index " + str(self.frameCount))
-            self.imageLabel2.configure(image=self.imageGIF2)
-        self.frameCount += 1
+        pass
+        # try:
+        #     self.imageGIF2 = PhotoImage(file="gif.gif", format="gif -index " + str(self.frameCount))
+        #     self.imageLabel2.configure(image=self.imageGIF2)
+        # except:
+        #     print('test')
+        #     self.frameCount = 0
+        #     self.imageGIF2 = PhotoImage(file="gif.gif", format="gif -index " + str(self.frameCount))
+        #     self.imageLabel2.configure(image=self.imageGIF2)
+        # self.frameCount += 1
 
     def win(self):
         return self._window
@@ -121,17 +125,18 @@ for i in range(8):
 
 
 def run_threaded():
-    controller = Controller()
-
+    pass
+    # controller = Controller()
+    #
     for action in actions:
         if action is not None:
-            action.run(controller)
-        else:
-            controller.setTarget(0, 6000)
-            controller.setTarget(1, 6000)
-            controller.setTarget(2, 6000)
-            controller.setTarget(3, 6000)
-            controller.setTarget(4, 6000)
+            action.run(None, server)
+    #     else:
+    #         controller.setTarget(0, 6000)
+    #         controller.setTarget(1, 6000)
+    #         controller.setTarget(2, 6000)
+    #         controller.setTarget(3, 6000)
+    #         controller.setTarget(4, 6000)
 
 
 def draw_animation(sm, delay):

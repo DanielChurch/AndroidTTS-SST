@@ -2,15 +2,13 @@ package io.github.legendaries.ass3
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.os.Build
-import android.os.Handler
-import android.os.Looper
-import android.os.Message
+import android.os.*
 import android.speech.tts.TextToSpeech
 import java.util.*
 
-class TTS (activity: Activity): Thread(), TextToSpeech.OnInitListener {
-    val tts = TextToSpeech(activity, this)
+class TTS (val activity: TalkActivity): Thread(), TextToSpeech.OnInitListener {
+    lateinit var tts: TextToSpeech
+    var init = false
 
     lateinit var handler: Handler
 
@@ -25,6 +23,11 @@ class TTS (activity: Activity): Thread(), TextToSpeech.OnInitListener {
     }
 
     override fun run() {
+        if (!init) {
+            init = true
+            tts = TextToSpeech(activity, this)
+        }
+
         Looper.prepare()
 
         handler = @SuppressLint("HandlerLeak")
@@ -51,6 +54,16 @@ class TTS (activity: Activity): Thread(), TextToSpeech.OnInitListener {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+        }
+
+        activity.connection.handler.run {
+            sendMessage(
+                    obtainMessage().apply {
+                        this.data = Bundle().apply {
+                            putString("TT", "done")
+                        }
+                    }
+            )
         }
     }
 }

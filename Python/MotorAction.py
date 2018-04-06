@@ -14,7 +14,7 @@ class MotorAction(Action):
         self.properties['Rotation Direction'] = (GuiType.DROPDOWN, 'left', ['left', 'right'])
 
     # Override run function
-    def run(self, controller):
+    def run(self, controller, server):
         speed = int(self.getPropertyValue('Speed'))
         direction = self.getPropertyValue('Forward')
         rot = self.getPropertyValue('Rotate')
