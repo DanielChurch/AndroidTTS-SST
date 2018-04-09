@@ -10,6 +10,7 @@ from WaitForSpeechAction import *
 from _thread import start_new_thread
 from Server import *
 
+
 import time
 
 server = Server()
@@ -126,17 +127,17 @@ for i in range(8):
 
 def run_threaded():
     pass
-    # controller = Controller()
-    #
+    controller = Controller()
+
     for action in actions:
         if action is not None:
             action.run(None, server)
-    #     else:
-    #         controller.setTarget(0, 6000)
-    #         controller.setTarget(1, 6000)
-    #         controller.setTarget(2, 6000)
-    #         controller.setTarget(3, 6000)
-    #         controller.setTarget(4, 6000)
+        else:
+            controller.setTarget(0, 6000)
+            controller.setTarget(1, 6000)
+            controller.setTarget(2, 6000)
+            controller.setTarget(3, 6000)
+            controller.setTarget(4, 6000)
 
 
 def draw_animation(sm, delay):
