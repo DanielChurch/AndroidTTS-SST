@@ -22,7 +22,7 @@ class Action:
     def getPropertyValue(self, property):
         return self.properties[property][0]
 
-    def run(self, controller):
+    def run(self, controller, server):
         pass
 
     def copy(self):

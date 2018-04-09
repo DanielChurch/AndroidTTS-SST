@@ -11,7 +11,7 @@ class PauseAction(Action):
         self.properties['Duration'] = (GuiType.SLIDER, 0, 0, 10)
 
     # Override run function
-    def run(self, controller):
+    def run(self, controller, server):
         print('timer start - running for', float(self.properties['Duration'][0]), 'seconds')
         controller.setTarget(0, 6000)
         controller.setTarget(1, 6000)

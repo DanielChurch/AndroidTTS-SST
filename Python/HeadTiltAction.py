@@ -10,7 +10,7 @@ class HeadTiltAction(Action):
         self.properties['Tilt'] = (GuiType.SLIDER, 0, -5, 5)
 
     # Override run function
-    def run(self, controller):
+    def run(self, controller, server):
         head_tilt_step = int(self.getPropertyValue('Tilt') * 500 + 6000)
         controller.setTarget(4, head_tilt_step)
         time.sleep(1)

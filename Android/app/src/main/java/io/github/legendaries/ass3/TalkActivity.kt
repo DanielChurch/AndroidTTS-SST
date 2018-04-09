@@ -12,7 +12,7 @@ import android.widget.TextView
 
 class TalkActivity: AppCompatActivity() {
     private val REQUEST_CODE = 69
-    private lateinit var connection: SocketConnection
+    lateinit var connection: SocketConnection
 
     lateinit var tts: TTS
 
@@ -20,9 +20,9 @@ class TalkActivity: AppCompatActivity() {
         super.onCreate(savedInstance)
         setContentView(R.layout.tts_activity)
 
+        tts = TTS(this).apply { start() }
         connection = SocketConnection(this, intent.getStringExtra("ip"), intent.getStringExtra("port").toInt())
                 .apply { start() }
-        tts = TTS(this).apply { start() }
 
         val editText = findViewById<EditText>(R.id.tts_text)
                 .apply { setText(context.getString(R.string.voiceline1)) }
@@ -42,6 +42,16 @@ class TalkActivity: AppCompatActivity() {
     }
 
     fun listenForSpeech() {
+        // Testing Code
+//        connection.handler.run {
+//            sendMessage(
+//                    obtainMessage().apply {
+//                        this.data = Bundle().apply {
+//                            putString("TT", "turn left 5")
+//                        }
+//                    }
+//            )
+//        }
         startActivityForResult(
                 Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
                     putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
