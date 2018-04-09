@@ -12,7 +12,7 @@ class PauseAction(Action):
 
     # Override run function
     def run(self, controller, server):
-        print('timer start - running for', float(self.properties['Duration'][0]), 'seconds')
+        print('timer start - running for', float(self.properties['Duration'][1]), 'seconds')
         controller.setTarget(0, 6000)
         controller.setTarget(1, 6000)
         controller.setTarget(2, 6000)

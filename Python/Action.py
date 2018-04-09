@@ -1,16 +1,16 @@
 from tkinter import *
-from enum import Enum
+from aenum import Enum, auto
 import time
 
 from Maestro import Controller
 
 class GuiType(Enum):
     # (SLIDER, init val, min, max)
-    SLIDER = Enum
+    SLIDER = auto()
     # (TEXTBOX, init text)
-    TEXTBOX = Enum
+    TEXTBOX = auto()
     # (DROPDOWN, init index, [options])
-    DROPDOWN = Enum
+    DROPDOWN = auto()
 
 class Action:
     def __init__(self):
@@ -20,7 +20,7 @@ class Action:
         self.propertyList = {}
 
     def getPropertyValue(self, property):
-        return self.properties[property][0]
+        return self.properties[property][1]
 
     def run(self, controller, server):
         pass

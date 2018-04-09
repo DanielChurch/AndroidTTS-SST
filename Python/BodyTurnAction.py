@@ -24,5 +24,7 @@ class BodyTurnAction(Action):
             time.sleep(duration)
             pass
 
+        time.sleep(duration)
+
     def copy(self):
         return BodyTurnAction()

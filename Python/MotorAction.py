@@ -1,4 +1,5 @@
 from Action import *
+import locale
 
 
 class MotorAction(Action):
@@ -16,8 +17,8 @@ class MotorAction(Action):
     # Override run function
     def run(self, controller, server):
         speed = int(self.getPropertyValue('Speed'))
-        direction = self.getPropertyValue('Forward')
-        rot = self.getPropertyValue('Rotate')
+        direction = self.getPropertyValue('Movement Direction')
+        rot = self.getPropertyValue('Rotation Direction')
         duration = int(self.getPropertyValue('Duration') / 1000)
 
         if rot == 'right':
@@ -48,42 +49,36 @@ class MotorAction(Action):
                 controller.setAccel(1, 1)
                 controller.setTarget(1, 7000)
         time.sleep(duration)
+        controller.setTarget(0, 6000)
+        controller.setTarget(1, 6000)
+        controller.setTarget(2, 6000)
+        controller.setTarget(3, 6000)
+        controller.setTarget(4, 6000)
         pass
 
     def run_custom(self, controller, dir, amount):
-        speed = int(self.getPropertyValue('Speed'))
-        direction = self.getPropertyValue('Forward')
-        rot = dir
-        duration = int(amount) / 1000
-        print("Moving" + dir + " " + amount )
+        # speed = int(self.getPropertyValue('Speed'))
+        # direction = self.getPropertyValue('Forward')
+        direction = dir
+        locale.atof(amount)
+        duration = float(amount)
+        print("Moving" + " " + dir + " " + amount )
 
-        if rot == 'right':
+        if direction == 'right':
             controller.setAccel(2, 6)
             controller.setTarget(2, 5000)
-        else:
+        elif direction == 'left':
             controller.setAccel(2, 6)
             controller.setTarget(2, 7000)
 
-        if direction == 'backward':
-            if speed == 3:
-                controller.setAccel(1, 1)
-                controller.setTarget(1, 4000)
-            elif speed == 2:
-                controller.setAccel(1, 2)
-                controller.setTarget(1, 4500)
-            else:
-                controller.setAccel(1, 1)
-                controller.setTarget(1, 5000)
+        elif direction == 'backward':
+            controller.setAccel(1, 1)
+            controller.setTarget(1, 4000)
+
         else:
-            if speed == 3:
-                controller.setAccel(1, 3)
-                controller.setTarget(1, 8000)
-            elif speed == 2:
-                controller.setAccel(1, 2)
-                controller.setTarget(1, 7500)
-            else:
-                controller.setAccel(1, 1)
-                controller.setTarget(1, 7000)
+            controller.setAccel(1, 3)
+            controller.setTarget(1, 8000)
+
         time.sleep(duration)
         pass
     def copy(self):

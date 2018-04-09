@@ -4,14 +4,14 @@ import time
 class SpeakAction(Action):
     def __init__(self):
         super(SpeakAction, self).__init__()
-        self.img = 'turn_body.gif'
+        self.img = 'tts.gif'
 
         # Properties in format (initialValue, min, max)
         self.properties['Presets'] = (GuiType.DROPDOWN, 'Hello World',
                                       ['Hello World',
                                        'Get down he has a gun! @@@@@@@@@@@@@@@@@@@@',
-                                       '',
-                                       '',
+                                       'What is my purpose?',
+                                       'Get your own butter',
                                        ''
                                        ])
         self.properties['Custom Quote'] = (GuiType.TEXTBOX, '')

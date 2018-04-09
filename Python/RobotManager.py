@@ -129,6 +129,7 @@ def run_threaded():
 
     # controller = Controller()
     #
+    time.sleep(3)
     for action in actions:
         if action is not None:
             action.run(None, server)
