@@ -127,17 +127,18 @@ for i in range(8):
 
 def run_threaded():
     pass
-    controller = Controller()
+    # controller = Controller()
 
     for action in actions:
         if action is not None:
             action.run(None, server)
         else:
-            controller.setTarget(0, 6000)
-            controller.setTarget(1, 6000)
-            controller.setTarget(2, 6000)
-            controller.setTarget(3, 6000)
-            controller.setTarget(4, 6000)
+            print()
+            # controller.setTarget(0, 6000)
+            # controller.setTarget(1, 6000)
+            # controller.setTarget(2, 6000)
+            # controller.setTarget(3, 6000)
+            # controller.setTarget(4, 6000)
 
 
 def draw_animation(sm, delay):
