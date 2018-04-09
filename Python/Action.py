@@ -1,16 +1,16 @@
 from tkinter import *
-from enum import Enum, auto
+from enum import Enum
 import time
 
-# from Maestro import Controller
+from Maestro import Controller
 
 class GuiType(Enum):
     # (SLIDER, init val, min, max)
-    SLIDER = auto()
+    SLIDER = Enum
     # (TEXTBOX, init text)
-    TEXTBOX = auto()
+    TEXTBOX = Enum
     # (DROPDOWN, init index, [options])
-    DROPDOWN = auto()
+    DROPDOWN = Enum
 
 class Action:
     def __init__(self):

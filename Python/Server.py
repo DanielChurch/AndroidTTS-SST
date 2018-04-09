@@ -37,11 +37,18 @@ class client(Thread):
 
 
 
+
 class Server(Thread):
     def __init__(self):
         Thread.__init__(self)
         self.ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+<<<<<<< HEAD
         self.host = '192.168.0.11'
+=======
+
+        self.host = '10.200.18.207'
+
+>>>>>>> 54fae55cfdeeb6347431ceccc6aad5c5b56549bc
         self.port = 6969
 
         self.ss.bind((self.host, self.port))
