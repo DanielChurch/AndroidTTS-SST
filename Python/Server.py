@@ -33,15 +33,22 @@ class client(Thread):
                 self.args = args
 
                 print(command, args)
+<<<<<<< HEAD
                 pass
 
+=======
+>>>>>>> 7c7c35fba798fa4382498b391228acb3a65b4a80
 
 
 class Server(Thread):
     def __init__(self):
         Thread.__init__(self)
         self.ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+<<<<<<< HEAD
         self.host = '10.200.18.207'
+=======
+        self.host = '104.145.124.182'
+>>>>>>> 7c7c35fba798fa4382498b391228acb3a65b4a80
         self.port = 6969
 
         self.ss.bind((self.host, self.port))
