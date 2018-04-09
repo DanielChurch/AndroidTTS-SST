@@ -2,7 +2,7 @@ from tkinter import *
 from enum import Enum
 import time
 
-# from Maestro import Controller
+from Maestro import Controller
 
 class GuiType(Enum):
     # (SLIDER, init val, min, max)
