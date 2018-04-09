@@ -1,4 +1,6 @@
 from Action import *
+from MotorAction import *
+
 
 
 class WaitForSpeechAction(Action):
@@ -8,10 +10,10 @@ class WaitForSpeechAction(Action):
 
         # Properties in format (GuiType, initialValue, min, max)
 
-    def move_robot(self, args):
-        # args is a list of arguments
-        # eg move 5
-        #                      5
+    def move_robot(self, args, controller):
+        action = MotorAction()
+        action.run_custom(controller, args[1], args[2])
+
         print("Moving Robot", args[0])
 
     def turn_robot(self, args):
@@ -21,6 +23,9 @@ class WaitForSpeechAction(Action):
         # or
         (direction, amount) = args
         print("Turning Robot", direction, amount)
+    def run_now(self):
+        print("running")
+        return
 
     # Override run function
     def run(self, controller, server):
@@ -31,7 +36,12 @@ class WaitForSpeechAction(Action):
 
         command = server.clients[0].command
         args = server.clients[0].args
-
+        print(server.clients[0].command)
+        if (server.clients[0].command == 'move'):
+            self.move_robot(controller, args)
+            print("in to move func")
+        else:
+            pass
         server.clients[0].reset()
 
         {
@@ -39,6 +49,11 @@ class WaitForSpeechAction(Action):
             'turn': self.turn_robot,  # eg. turn left 5
             'exit': lambda e: exit(),
         }.get(command, lambda e: print('Invalid command'))(args)
+
+        # args = server.run()
+
+
+        #     return
 
     def copy(self):
         return WaitForSpeechAction()
